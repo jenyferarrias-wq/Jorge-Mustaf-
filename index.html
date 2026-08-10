@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IncluiAula - Educação Inclusiva na Prática</title>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --secondary: #50E3C2;
+            --dark: #2C3E50;
+            --light: #F8F9FA;
+            --card-bg: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            background-color: var(--dark);
+            padding: 0.8rem;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        nav button:hover, nav button.active {
+            background-color: var(--primary);
+        }
+
+        container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: block;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #CCC;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        button.btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        button.btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-left: 5px solid var(--primary);
+            border-radius: 8px;
+            padding: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #E1F5FE;
+            color: #0288D1;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>IncluiAula</h1>
+        <p>Ferramentas práticas de Educação Inclusiva para professores</p>
+    </header>
+
+    <nav>
+        <button class="active" onclick="switchTab('gerador')">Adaptar Aula</button>
+        <button onclick="switchTab('estrategias')">Estratégias Rápidas</button>
+        <button onclick="switchTab('comunidade')">Troca de Materiais</button>
+    </nav>
+
+    <container>
+        <section id="gerador" class="tab-content active">
+            <h2>Adaptar Atividade</h2>
+            <p style="margin-bottom: 1.5rem;">Insira os dados da sua aula para receber ideias práticas de adaptação.</p>
+            
+            <div class="form-group">
+                <label for="assunto">Assunto ou Atividade da Aula:</label>
+                <input type="text" id="assunto" placeholder="Ex: Leitura de texto sobre o ciclo da água">
+            </div>
+
+            <div class="form-group">
+                <label for="necessidade">Necessidade do Aluno:</label>
+                <select id="necessidade">
+                    <option value="tea">TEA (Transtorno do Espectro Autista)</option>
+                    <option value="tdah">TDAH (Atenção e Hiperatividade)</option>
+                    <option value="baixa-visao">Deficiência Visual / Baixa Visão</option>
+                    <option value="surdez">Deficiência Auditiva / Surdez</option>
+                </select>
+            </div>
+
+            <button class="btn-primary" onclick="gerarAdaptacao()">Gerar Ideias de Adaptação</button>
+
+            <div id="resultado-gerador" style="margin-top: 2rem;"></div>
+        </section>
+
+        <section id="estrategias" class="tab-content">
+            <h2>Cartões de Ação Rápida</h2>
+            <p style="margin-bottom: 1rem;">Guias diretos: Problema x Estratégia x Teoria.</p>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="tag">Comportamento / Foco</span>
+                    <h4>Dificuldade em manter a atenção prolongada</h4>
+                    <p><strong>Estratégia Prática:</strong> Técnica Pomodoro adaptada (15 min de foco + 3 min de pausa ativa). Uso de cronômetro visual.</p>
+                    <p><strong>Fundamento Teórico:</strong> ZPD (Vygotsky) - O suporte visual reduz a carga cognitiva e autorregula o tempo de atenção.</p>
+                </div>
+
+                <div class="card">
+                    <span class="tag">Compreensão Textual</span>
+                    <h4>Sobrecarga na leitura de textos longos</h4>
+                    <p><strong>Estratégia Prática:</strong> Dividir o texto em blocos menores com imagens laterais explicativas (Texto Multimodal).</p>
+                    <p><strong>Fundamento Teórico:</strong> Teoria da Carga Cognitiva (Sweller) - Apresentar a informação de formas combinadas facilidades o processamento.</p>
+                </div>
+
+                <div class="card">
+                    <span class="tag">Sensorial</span>
+                    <h4>Agitação em ambientes muito barulhentos</h4>
+                    <p><strong>Estratégia Prática:</strong> Cantinho do alívio sensorial com abafadores de ruído e cartões de comunicação sem necessidade de fala.</p>
+                    <p><strong>Fundamento Teórico:</strong> Integração Sensorial (Ayres) - Ajustar os estímulos ambientais favorece o engajamento e previne crises.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="comunidade" class="tab-content">
+            <h2>Compartilhar Material do Estágio</h2>
+            <p style="margin-bottom: 1.5rem;">Envie jogos, pranchas e atividades adaptadas para ajudar outros colegas.</p>
+
+            <form id="form-material" onsubmit="adicionarMaterial(event)">
+                <div class="form-group">
+                    <label for="titulo-material">Nome do Material/Jogo:</label>
+                    <input type="text" id="titulo-material" required placeholder="Ex: Dominó de Frações Tátil">
+                </div>
+                <div class="form-group">
+                    <label for="desc-material">Descrição e Como Usar:</label>
+                    <textarea id="desc-material" rows="3" required placeholder="Explique resumidamente a atividade..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Publicar Material</button>
+            </form>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Materiais Compartilhados</h3>
+            <div id="lista-materiais" class="cards-grid">
+                <div class="card">
+                    <span class="tag">Jogo Adaptado</span>
+                    <h4>Prancha de Rotina Visual em Velcro</h4>
+                    <p>Ajuda no planejamento das tarefas do dia usando figuras simples. Excelente para alunos com TEA no ensino fundamental I.</p>
+                    <small><strong>Enviado por:</strong> Maria (Estágio II)</small>
+                </div>
+            </div>
+        </section>
+    </container>
+
+    <script>
+        // Alternar entre as abas
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Simulação do Gerador de Adaptações
+        function gerarAdaptacao() {
+            const assunto = document.getElementById('assunto').value;
+            const necessidade = document.getElementById('necessidade').value;
+            const container = document.getElementById('resultado-gerador');
+
+            if (!assunto.trim()) {
+                alert('Por favor, informe o assunto da aula!');
+                return;
+            }
+
+            let sugestao = '';
+
+            if (necessidade === 'tea') {
+                sugestao = `
+                    <div class="card" style="border-left-color: #50E3C2;">
+                        <h4>Adaptação para TEA: "${assunto}"</h4>
+                        <p><strong>1. Antecipação Visual:</strong> Apresente a estrutura da aula no quadro (Ex: 1º Explicação -> 2º Leitura -> 3º Exercício).</p>
+                        <p><strong>2. Instruções Diretas:</strong> Evite metáforas no enunciado da atividade de ${assunto}. Use passos curtos e numerados.</p>
+                        <p><strong>3. Apoio Concreto:</strong> Se a aula for abstrata, utilize cards explicativos ou objetos físicos.</p>
+                    </div>`;
+            } else if (necessidade === 'tdah') {
+                sugestao = `
+                    <div class="card" style="border-left-color: #F5A623;">
+                        <h4>Adaptação para TDAH: "${assunto}"</h4>
+                        <p><strong>1. Fracionamento:</strong> Destaque o texto/atividade sobre "${assunto}" em partes menores. Entregue uma etapa por vez.</p>
+                        <p><strong>2. Elementos Destaque:</strong> Use marca-texto ou negrito para grifar as palavras-chave da orientação.</p>
+                        <p><strong>3. Papel Ativo:</strong> Dê uma função prática durante a explicação (ex: segurar o material ou mudar o slide).</p>
+                    </div>`;
+            } else if (necessidade === 'baixa-visao') {
+                sugestao = `
+                    <div class="card" style="border-left-color: #E74C3C;">
+                        <h4>Adaptação para Baixa Visão: "${assunto}"</h4>
+                        <p><strong>1. Contraste e Fonte:</strong> Impressão com fonte ampliada (tamanho 18 a 24) e contraste alto (texto preto em fundo amarelo/branco).</p>
+                        <p><strong>2. Recurso Auditivo:</strong> Disponibilize leitura em áudio da aula sobre "${assunto}" ou promova leitura em dupla.</p>
+                    </div>`;
+            } else {
+                sugestao = `
+                    <div class="card" style="border-left-color: #9B59B6;">
+                        <h4>Adaptação para Surdez/Deficiência Auditiva: "${assunto}"</h4>
+                        <p><strong>1. Mídia Visual:</strong> Utilize diagramas, imagens e esquemas gráficos claros sobre "${assunto}".</p>
+                        <p><strong>2. Posicionamento:</strong> Mantenha contato visual direto ao falar, sem cobrir a boca, permitindo a leitura labial.</p>
+                    </div>`;
+            }
+
+            container.innerHTML = sugestao;
+        }
+
+        // Adicionar novo material na aba de troca
+        function adicionarMaterial(event) {
+            event.preventDefault();
+            
+            const titulo = document.getElementById('titulo-material').value;
+            const desc = document.getElementById('desc-material').value;
+            const lista = document.getElementById('lista-materiais');
+
+            const novoCard = document.createElement('div');
+            novoCard.className = 'card';
+            novoCard.innerHTML = `
+                <span class="tag">Novo Material</span>
+                <h4>${titulo}</h4>
+                <p>${desc}</p>
+                <small><strong>Enviado por:</strong> Você (Recém-publicado)</small>
+            `;
+
+            lista.prepend(novoCard);
+
+            // Limpar formulário
+            document.getElementById('form-material').reset();
+        }
+    </script>
+</body>
+</html>
